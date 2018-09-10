@@ -107,13 +107,10 @@ def dialogos (personaje, guion):
     parrafo = guion.split('\n')
     for i in range(1,len(parrafo)-1):
         if personaje in parrafo[i-1]:
-            #print 'hola'
             for j in range(len(per)):
                 if per[j] != personaje and (per[j] in parrafo[i-1]):
-                    #print 'wena'
                     intera.append(per[j])
                 if per[j] != personaje and (per[j] in parrafo[i+1]):
-                    #print 'wena'
                     intera.append(per[j])
     cuenta1 = collections.Counter(intera)
     diag = cuenta1.keys()
