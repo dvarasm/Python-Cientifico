@@ -142,7 +142,7 @@ for i in range(len(per)):
 tmp = 0
 for i in pers:
     if pp in i:
-        print 'Interactua con : ',len(dialogos(pp,guion)),' personajes'
+        print pp, ' Interactua con : ',len(dialogos(pp,guion)),' personajes'
         print dialogos(pp,guion)
         tmp +=1
 if tmp == 0:        
