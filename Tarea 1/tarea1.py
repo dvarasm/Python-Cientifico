@@ -128,14 +128,11 @@ print 'Numero de personajes: %s' %(str(len(per)))
 print 'Personajes: '
 for i in range(len(per)):
 	print ' ',str(filtrar_texto(per[i]))
-print 'Personaje que tiene el dialogo mas largo'
-print mas_extenso(dicc)
+print 'Personaje que tiene el dialogo mas largo: ', mas_extenso(dicc)
 print 'Personaje que tiene el dialogo mas corto: ', str(len(menos_extenso(dicc))), 'personajes'
 print menos_extenso(dicc)
-print 'Personaje que tiene mas dialogo en el guion'
-print mas_dialogo(dicc)
-print 'Personaje que tiene menos dialogo en el guion'
-print menos_dialogo(dicc)
+print 'Personaje que tiene mas dialogo en el guion: ',mas_dialogo(dicc)
+print 'Personaje que tiene menos dialogo en el guion: ',menos_dialogo(dicc)
 print 'Ingrese personaje para ver con quien interactua: '
 p= raw_input()
 pp = p.upper()
@@ -145,7 +142,7 @@ for i in range(len(per)):
 tmp = 0
 for i in pers:
     if pp in i:
-        print 'Interactua con :'
+        print 'Interactua con : ',len(dialogos(pp,guion)),' personajes'
         print dialogos(pp,guion)
         tmp +=1
 if tmp == 0:        
