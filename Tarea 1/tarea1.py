@@ -104,14 +104,17 @@ def dialogos (personaje, guion):
     for i in range(len(pe)):
         per.append(filtrar_texto(pe[i]))
     intera = []
+    parrafo = []
     parrafo = guion.split('\n')
-    for i in range(1,len(parrafo)-1):
-        if personaje in parrafo[i-1]:
-            for j in range(len(per)):
-                if per[j] != personaje and (per[j] in parrafo[i-1]):
-                    intera.append(per[j])
-                if per[j] != personaje and (per[j] in parrafo[i+1]):
-                    intera.append(per[j])
+    
+    for j in range(len(per)):
+        if per[j] != personaje:
+            for i in range(2,len(parrafo)-2):
+                if personaje in parrafo[i]:
+                    if per[j] in parrafo[i-2]:
+                        intera.append(per[j])
+                    if per[j] in parrafo[i+2]:
+                        intera.append(per[j])
     cuenta1 = collections.Counter(intera)
     diag = cuenta1.keys()
     return diag
