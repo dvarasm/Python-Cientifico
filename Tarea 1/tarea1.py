@@ -52,13 +52,20 @@ def crea_diccionario(guion, personajes):
 #funcion que entrega el personaje que tiene el dialogo mas extenso
 def mas_extenso(dicc):
     max = 0
+    max_ext = []
     for clave, valor in dicc.iteritems():
         for i in range(len(valor)):
             tmp = filtrar_texto(valor[i]).strip().split(' ')#strip elimina el espacio antes de un string
             if max <= len(tmp):
                 max = len(tmp)
-                max_per = clave
-    return max_per
+    for clave,valor in dicc.iteritems():
+        for i in range(len(valor)):
+            tmp = filtrar_texto(valor[i]).strip().split(' ')
+            if max == len(tmp):
+                max_ext.append(clave)
+    cuenta1 = collections.Counter(max_ext)
+    m_e = cuenta1.keys()
+    return m_e
 
 #funcion que entrega un personaje que tiene el dialogo mas corto
 def menos_extenso(dicc):
@@ -128,7 +135,8 @@ print 'Numero de personajes: %s' %(str(len(per)))
 print 'Personajes: '
 for i in range(len(per)):
 	print ' ',str(filtrar_texto(per[i]))
-print 'Personaje que tiene el dialogo mas largo: ', mas_extenso(dicc)
+print 'Personaje que tiene el dialogo mas largo: ',str(len(mas_extenso(dicc))), 'personajes' 
+print mas_extenso(dicc)
 print 'Personaje que tiene el dialogo mas corto: ', str(len(menos_extenso(dicc))), 'personajes'
 print menos_extenso(dicc)
 print 'Personaje que tiene mas dialogo en el guion: ',mas_dialogo(dicc)
