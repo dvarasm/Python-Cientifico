@@ -1,0 +1,5 @@
+Reporte
+Centro de Salud: centro_A
+Estadisticas por especialidad:
+
+Segunda linea

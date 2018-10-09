@@ -59,8 +59,8 @@ class CentroSalud:
         
     def reporte(self):
         file = open(str(self.nombre_archivo.rstrip('.csv'))+"_"+str(time.strftime("%d_%m_%y"))+".txt", "w")        
-        file.write(str("Primera línea\n"))
-        file.write("Segunda línea")
+        file.write("Reporte\nCentro de Salud: "+str(self.nombre_archivo.rstrip('.csv'))+"\nEstadisticas por especialidad:\n\n")
+        file.write("Segunda linea")
         file.close()
         return None
     
