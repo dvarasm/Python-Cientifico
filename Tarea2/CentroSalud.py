@@ -3,24 +3,19 @@ from __future__ import unicode_literals
 import numpy as np
 import pandas as pd
 import time
+import collections
+import os
 
 class CentroSalud:
     def __init__(self,nombre_archivo):
         self.nombre_archivo = nombre_archivo
         self.datos = pd.read_csv(self.nombre_archivo,sep=';')
-        
-    def imprimir(self):
-        print self.datos
-        print self.datos.loc["cirugia", "masa"]
-        print len(self.datos.loc["cirugia", "masa"])
 
     def estadisticas_especialidad (self,especialidad,parametro):
         p = np.asarray(self.datos.set_index('especialidad').loc[especialidad,parametro])
         desviacion = p.std()
         promedio = p.mean()
-        solucion = str(int(promedio))+"+-"+str(int(desviacion))
-        return solucion         
-        #return {'Promedio':int(promedio),'DesEst':int(desviacion)}
+        return str(int(promedio))+"+-"+str(int(desviacion))       
         
     def especialidad_imc (self,especialidad):
         m = np.asarray(self.datos.set_index('especialidad').loc[especialidad,"masa"])
@@ -60,11 +55,23 @@ class CentroSalud:
     def reporte(self):
         file = open(str(self.nombre_archivo.rstrip('.csv'))+"_"+str(time.strftime("%d_%m_%y"))+".txt", "w")        
         file.write("Reporte\nCentro de Salud: "+str(self.nombre_archivo.rstrip('.csv'))+"\nEstadisticas por especialidad:\n\n")
-        file.write("Segunda linea")
+        data = np.asarray(self.datos)
+        esp_data = []
+        for i in range(len(data)):
+            esp_data.append(data[i][1])
+        esp = (collections.Counter(esp_data)).keys()
+        for i in range(len(esp)):
+            file.write(str(esp[i]+":\n"))
+            file.write("Masa: "+self.estadisticas_especialidad(esp[i],"masa")+" kg\n")
+            file.write("Altura: "+self.estadisticas_especialidad(esp[i],"altura")+" cm\n")
+            file.write("Pas: "+self.estadisticas_especialidad(esp[i],"pas")+" mmHg\n")
+            file.write("Pad: "+self.estadisticas_especialidad(esp[i],"pad")+" mmHg\n\n") 
         file.close()
+        os.system(str(self.nombre_archivo.rstrip('.csv'))+"_"+str(time.strftime("%d_%m_%y"))+".txt")
         return None
     
     def __add__(self,otro):
         centro = CentroSalud(str(self.nombre_archivo))
         centro.datos = pd.concat([self.datos,otro.datos])
+        centro.nombre_archivo = str(self.nombre_archivo.rstrip('.csv'))+"_"+str(otro.nombre_archivo)
         return centro
