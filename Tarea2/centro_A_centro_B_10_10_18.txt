@@ -1,0 +1,46 @@
+Reporte
+Centro de Salud: centro_A_centro_B
+Estadisticas por especialidad:
+
+cirugia:
+Masa: 69.86+-9 kg
+Altura: 164.57+-8 cm
+Pas: 111.86+-12 mmHg
+Pad: 68.71+-4 mmHg
+
+urologia:
+Masa: 117.5+-27 kg
+Altura: 177.5+-15 cm
+Pas: 131.5+-12 mmHg
+Pad: 78.5+-8 mmHg
+
+endocrinologia:
+Masa: 83.75+-22 kg
+Altura: 164.5+-20 cm
+Pas: 123.88+-15 mmHg
+Pad: 70.25+-5 mmHg
+
+neurologia:
+Masa: 70.33+-15 kg
+Altura: 164.58+-13 cm
+Pas: 120.5+-16 mmHg
+Pad: 73.42+-6 mmHg
+
+cardiologia adulto:
+Masa: 103.5+-12 kg
+Altura: 173.0+-21 cm
+Pas: 131.42+-17 mmHg
+Pad: 75.17+-10 mmHg
+
+nefrologia:
+Masa: 103.25+-19 kg
+Altura: 180.25+-17 cm
+Pas: 119.63+-20 mmHg
+Pad: 74.88+-8 mmHg
+
+broncopulmonar:
+Masa: 76.67+-28 kg
+Altura: 177.89+-9 cm
+Pas: 116.78+-21 mmHg
+Pad: 73.22+-11 mmHg
+

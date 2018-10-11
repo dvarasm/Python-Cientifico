@@ -2,10 +2,7 @@
 #from __future__ import unicode_literals
 import numpy as np
 import pandas as pd
-import time
-import collections
-import os
-import random
+import time,collections,random,webbrowser
 
 class CentroSalud:
     def __init__(self,nombre_archivo):
@@ -64,8 +61,8 @@ class CentroSalud:
         print 'Archivo Guardado'
         
     def reporte(self):
-        file = open(str(self.nombre_archivo.rstrip('.csv'))+"_"+str(time.strftime("%d_%m_%y"))+".txt", "w")        
-        file.write("Reporte\nCentro de Salud: "+str(self.nombre_archivo.rstrip('.csv'))+"\nEstadisticas por especialidad:\n\n")
+        file = open(str(self.nombre_centro())+"_"+str(time.strftime("%d_%m_%y"))+".txt", "w")        
+        file.write("Reporte\nCentro de Salud: "+str(self.nombre_centro())+"\nEstadisticas por especialidad:\n\n")
         data = np.asarray(self.datos)
         esp_data = []
         for i in range(len(data)):
@@ -77,12 +74,15 @@ class CentroSalud:
             file.write("Altura: "+self.estadisticas_especialidad(esp[i],"altura")+" cm\n")
             file.write("Pas: "+self.estadisticas_especialidad(esp[i],"pas")+" mmHg\n")
             file.write("Pad: "+self.estadisticas_especialidad(esp[i],"pad")+" mmHg\n\n") 
-        file.close()
-        #os.system(str(self.nombre_archivo.rstrip('.csv'))+"_"+str(time.strftime("%d_%m_%y"))+".txt")
-        return None
-    
+        file.close()        
+        ar = webbrowser.open(str(self.nombre_centro())+"_"+str(time.strftime("%d_%m_%y"))+".txt")
+        if ar is True:
+            print 'Reporte Desplegado de '+self.nombre_centro()
+        else:
+            print 'Error al abrir reporte de '+self.nombre_centro()
+            
     def __add__(self,otro):
         centro = CentroSalud(str(self.nombre_archivo))
         centro.datos = pd.concat([self.datos,otro.datos])
-        centro.nombre_archivo = str(self.nombre_archivo.rstrip('.csv'))+"_"+str(otro.nombre_archivo)
+        centro.nombre_archivo = str(self.nombre_centro())+"_"+str(otro.nombre_centro())
         return centro

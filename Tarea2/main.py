@@ -2,10 +2,8 @@
 from __future__ import unicode_literals
 import CentroSalud as cs
 
-esp_a = ['broncopulmonar', 'cirugia', 'endocrinologia', 'neurologia', 'cardiologia adulto'
-]
-esp_b = ['cirugia', 'urologia', 'endocrinologia', 'cardiologia adulto', 'nefrologia', 'broncopulmonar'
-]
+esp_a = ['broncopulmonar', 'cirugia', 'endocrinologia', 'neurologia', 'cardiologia adulto']
+esp_b = ['cirugia', 'urologia', 'endocrinologia', 'cardiologia adulto', 'nefrologia', 'broncopulmonar']
 esp_ab = esp_a + esp_b
 para = ['masa','altura','pas','pad']
 
@@ -22,8 +20,8 @@ for i in esp_a:
     print'\n'
     
 #c1.nuevo_paciente()
-#c1.reporte()
-#c1.guardar_datos("newDataCentroA.csv")
+c1.reporte()
+c1.guardar_datos("newDataCentroA.csv")
 print '---------------------------------------'
 
 print '\n-------------'+c2.nombre_centro()+'-------------\n'
@@ -36,8 +34,8 @@ for i in esp_b:
     print'\n'
 
 #c2.nuevo_paciente()
-#c2.reporte()
-#c2.guardar_datos("newDataCentroB.csv")
+c2.reporte()
+c2.guardar_datos("newDataCentroB.csv")
 print '---------------------------------------'
 
 c3 = c1 + c2 #Sumar Centros
@@ -52,6 +50,6 @@ for i in esp_ab:
     print'\n'
 
 #c3.nuevo_paciente()
-#c3.reporte()
-#c3.guardar_datos("newDataCentroAB.csv")
+c3.reporte()
+c3.guardar_datos("newDataCentroAB.csv")
 print '---------------------------------------'
