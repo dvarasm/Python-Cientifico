@@ -2,13 +2,13 @@
 from __future__ import unicode_literals
 import CentroSalud as cs
 
-esp_a = ['broncopulmonar', 'cirugia', 'endocrinologia', 'neurologia', 'cardiologia adulto']
-esp_b = ['cirugia', 'urologia', 'endocrinologia', 'cardiologia adulto', 'nefrologia', 'broncopulmonar']
-esp_ab = esp_a + esp_b
-para = ['masa','altura','pas','pad']
-
 c1 = cs.CentroSalud("centro_A.csv")
 c2 = cs.CentroSalud("centro_B.csv")
+
+esp_a = c1.especialidades_centro()
+esp_b = c2.especialidades_centro()
+esp_ab = esp_a + esp_b
+para = ['masa','altura','pas','pad']
 
 print '\n-------------'+c1.nombre_centro()+'-------------\n'
 for i in esp_a:
