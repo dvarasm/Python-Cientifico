@@ -22,7 +22,7 @@ for i in esp_a:
     c1.especialidad_pam(i)#imprime PAM por especialidad
     print'\n'
     
-#c1.nuevo_paciente()#crea un paciente nuevo
+c1.nuevo_paciente()#crea un paciente nuevo
 c1.reporte()#crea el reporte
 c1.guardar_datos("newDataCentroA.csv")#guarda los datos en un archivo csv
 print '---------------------------------------'
@@ -36,7 +36,7 @@ for i in esp_b:
     c2.especialidad_pam(i)#imprime PAM por especialidad
     print'\n'
 
-#c2.nuevo_paciente()#crea un paciente nuevo
+c2.nuevo_paciente()#crea un paciente nuevo
 c2.reporte()#crea el reporte
 c2.guardar_datos("newDataCentroB.csv")#guarda los datos en un archivo csv
 print '---------------------------------------'
@@ -50,7 +50,7 @@ for i in esp_ab:
     c3.especialidad_pam(i)#imprime PAM por especialidad
     print'\n'
 
-#c3.nuevo_paciente()#crea un paciente nuevo
+c3.nuevo_paciente()#crea un paciente nuevo
 c3.reporte()#crea el reporte
 c3.guardar_datos("newDataCentroAB.csv")#guarda los datos en un archivo csv
 print '---------------------------------------'
