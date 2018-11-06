@@ -1,4 +1,4 @@
-from Tkinter import *
+from tkinter import *
 from PIL import ImageTk, Image
 import os
 
@@ -8,10 +8,10 @@ v.geometry('800x400')#tamano de ventana
 v.resizable(width=False, height=False)#la ventana no se puede cambiar de tamano
 
 def funcion_b1():#funcion del boton 1
-    print "Iniciar"
+    print ("Iniciar")
 
 def funcion_b2():#funcion del boton 2
-    print "Parar"
+    print ("Parar")
 
 numero = 8 #variable a obtener
 var_sos = "Elementos\nsospechosos: "+str(numero)

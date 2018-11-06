@@ -14,7 +14,7 @@ class CentroSalud:
         esp_data = []
         for i in range(len(data)):
             esp_data.append(data[i][1])#obtener todas las especialidades
-        return (collections.Counter(esp_data)).keys()#funcion collection para eliminar elementos repetidos
+        return list((collections.Counter(esp_data)).keys())#funcion collection para eliminar elementos repetidos
         
     def nombre_centro(self):# metodo que devuelve el nombre del centro
         return str(self.nombre_archivo.rstrip('.csv'))
@@ -36,7 +36,7 @@ class CentroSalud:
         imc_a = np.array(IMC)
         promedio = round(float(imc_a.mean()),2)#funcion mean para calcular el promedio
         desviacion = int(imc_a.std())# funcion std para calcular la desviacion estandar
-        print "Promedio IMC: "+str(promedio)+'+-'+str(desviacion)+" Pacientes con obesidad: "+str(obeso)        
+        print ("Promedio IMC: "+str(promedio)+'+-'+str(desviacion)+" Pacientes con obesidad: "+str(obeso))        
         
     def especialidad_pam (self,especialidad):
         pas = np.asarray(self.datos.set_index('especialidad').loc[especialidad,"pas"])
@@ -49,23 +49,23 @@ class CentroSalud:
         pam_a = np.array(PAM)
         promedio = round(float(pam_a.mean()),2)#funcion mean para calcular el promedio
         desviacion = int(pam_a.std())# funcion std para calcular la desviacion estandar
-        print "Promedio PAM: "+str(promedio)+'+-'+str(desviacion)+" Pacientes con un rango normal: "+str(normal)
+        print ("Promedio PAM: "+str(promedio)+'+-'+str(desviacion)+" Pacientes con un rango normal: "+str(normal))
     
     def nuevo_paciente(self):
         id = int(random.randrange(min(self.datos['ID']),max(self.datos['ID'])))       
         new = pd.DataFrame(columns=['ID','especialidad','masa','altura','pas','pad'])#creacion de dataframe vacio, solo con las columnas , para poder guardar los datos obtenidos por consola
-        esp = raw_input("Especialidad: ")#parametro recibido por consola 
+        esp = input("Especialidad: ")#parametro recibido por consola 
         masa = int(input("Masa: "))#parametro recibido por consola
         altura = int(input("Altura: "))#parametro recibido por consola
         pas = int(input("PAS: "))#parametro recibido por consola
         pad = int(input("PAD: "))#parametro recibido por consola
         new = new.append([{'ID':id,'especialidad':esp,'masa':masa,'altura':altura,'pas':pas,'pad':pad}])#agregar datos obtenidos por consola al dataframe
         self.datos = pd.concat([self.datos,new],ignore_index=True)# funcion para concatenar 2 dataframe
-        print 'Paciente Agregado'
+        print ('Paciente Agregado')
         
     def guardar_datos(self,nombre_archivo_csv):# metodo para guardar el dataframe datos en un archivo csv
         self.datos.set_index('ID').to_csv(nombre_archivo_csv,sep=str(';'))        
-        print 'Archivo Guardado'
+        print ('Archivo Guardado')
         
     def reporte(self):#metodo para generar reporte
         file = open(str(self.nombre_centro())+"_"+str(time.strftime("%d_%m_%y"))+".txt", "w")#fincion para crear una archivo txt vacio que contiene la fecha actual de la libreria time mediante la funcion strftime      
@@ -80,9 +80,9 @@ class CentroSalud:
         file.close()        
         ar = webbrowser.open(str(self.nombre_centro())+"_"+str(time.strftime("%d_%m_%y"))+".txt")#funcion para desplegar el archivo txt
         if ar is True:#comprobar que se desplego el archivo
-            print 'Reporte Desplegado de '+self.nombre_centro()
+            print ('Reporte Desplegado de '+self.nombre_centro())
         else:
-            print 'Error al abrir reporte de '+self.nombre_centro()
+            print ('Error al abrir reporte de '+self.nombre_centro())
             
     def __add__(self,otro):#metodo para sumar centros
         centro = CentroSalud(str(self.nombre_archivo))#crea un objeto centro
