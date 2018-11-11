@@ -8,7 +8,7 @@ class App(QtWidgets.QApplication):
         self.MainWindow = QtWidgets.QMainWindow()
         self.MainWindow.ui = uic.loadUi('interfaz.ui')
         self.MainWindow.ui.setWindowTitle("Detector")
-        self.MainWindow.ui.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
+        self.MainWindow.ui.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)#para no redimensionar
         self.MainWindow.ui.show()
                 
         #ACA van los widgets para las funciones
