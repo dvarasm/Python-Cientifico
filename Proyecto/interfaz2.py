@@ -6,7 +6,7 @@ class App(QtWidgets.QApplication):
     def __init__(self, *args):
         QtWidgets.QApplication.__init__(self, *args)
         self.MainWindow = QtWidgets.QMainWindow()
-        self.MainWindow.ui = uic.loadUi('interfaz.ui')#carga la interfaz
+        self.MainWindow.ui = uic.loadUi('vista.ui')#carga la interfaz
         self.MainWindow.ui.setWindowTitle("Detector")#nombre de la ventana
         self.MainWindow.ui.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint|QtCore.Qt.WindowCloseButtonHint)#para no redimensionar
         self.MainWindow.ui.show()
