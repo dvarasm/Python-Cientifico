@@ -6,41 +6,44 @@ class App(QtWidgets.QApplication):
     def __init__(self, *args):
         QtWidgets.QApplication.__init__(self, *args)
         self.MainWindow = QtWidgets.QMainWindow()
-        self.MainWindow.ui = uic.loadUi('interfaz.ui')
-        self.MainWindow.ui.setWindowTitle("Detector")
+        self.MainWindow.ui = uic.loadUi('interfaz.ui')#carga la interfaz
+        self.MainWindow.ui.setWindowTitle("Detector")#nombre de la ventana
         self.MainWindow.ui.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint|QtCore.Qt.WindowCloseButtonHint)#para no redimensionar
         self.MainWindow.ui.show()
                 
-        #ACA van los widgets para las funciones
-        #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#pyqt4
-        #self.MainWindow.ui.saludar.clicked.connect(self.saludar)#pyqt5
-        self.MainWindow.ui.Iniciar.clicked.connect(self.funcion_b1)
-        self.MainWindow.ui.Detener.clicked.connect(self.funcion_b2)
-
+        #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#ejemplo pyqt4
+        #self.MainWindow.ui.saludar.clicked.connect(self.saludar)#ejemplo pyqt5
         
-        pixmap = QtGui.QPixmap('m.png')
-        pixmap = pixmap.scaled(600, 400)
-        self.MainWindow.ui.imagen_an.setPixmap(pixmap)
+        #botones
+        self.MainWindow.ui.Iniciar.clicked.connect(self.funcion_b1)#listener del boton iniciar
+        self.MainWindow.ui.Detener.clicked.connect(self.funcion_b2)#listener del boton parar
 
+        #imagen
+        pixmap = QtGui.QPixmap('m.png')#carga la imagen
+        pixmap = pixmap.scaled(600, 400)#redimensiona la imagen
+        self.MainWindow.ui.imagen_an.setPixmap(pixmap)#agrega imagen
+        
+        self.sosp = 0 #elemento a obtener 
         
     # metodos
 
-    def funcion_b1(self):#funcion del boton 1
+    def funcion_b1(self):#funcion del boton iniciar
         print ("Iniciar")
-        sosp = 1 #elemento variable
-        self.MainWindow.ui.LCDnumber.display(sosp)
-        pixmap = QtGui.QPixmap('fuji.png')
-        pixmap = pixmap.scaled(600, 400)
-        self.MainWindow.ui.imagen_an.setPixmap(pixmap)
+        self.sosp += 1 #elemento variable
+        self.MainWindow.ui.LCDnumber.display(self.sosp)#cambia el numero LCD
+        pixmap = QtGui.QPixmap('fuji.png')#carga la imagen
+        pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+        self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
 
 
-    def funcion_b2(self):#funcion del boton 2
+    def funcion_b2(self):#funcion del boton parar
         print ("Parar")
-        pixmap = QtGui.QPixmap('m.png')
-        pixmap = pixmap.scaled(600, 400)
-        self.MainWindow.ui.imagen_an.setPixmap(pixmap)
-        sosp = 0 
-        self.MainWindow.ui.LCDnumber.display(sosp)
+        pixmap = QtGui.QPixmap('m.png')#carga la imagen
+        pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+        self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
+        if(self.sosp>0):
+            self.sosp -= 1 #elemento variable
+        self.MainWindow.ui.LCDnumber.display(self.sosp)#cambia el numero LCD
                     
 ## Se crea una funcion que cree un objeto aplicacion, entregandole argumentos de sistema.
 def main(args):
