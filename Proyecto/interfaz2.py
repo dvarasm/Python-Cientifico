@@ -10,7 +10,6 @@ class App(QtWidgets.QApplication):
         self.MainWindow.ui.setWindowTitle("Detector")#nombre de la ventana
         self.MainWindow.ui.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint|QtCore.Qt.WindowCloseButtonHint)#para no redimensionar
         self.MainWindow.ui.show()
-        #self.fileChosen = None
         self.path = ''
                 
         #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#ejemplo pyqt4
