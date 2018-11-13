@@ -62,6 +62,58 @@
       <item>
        <layout class="QVBoxLayout" name="Izquierda">
         <item>
+         <layout class="QVBoxLayout" name="archivo">
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QPushButton" name="cargar_imagen">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>135</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>135</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="sizeIncrement">
+             <size>
+              <width>135</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>135</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(115, 115, 115);
+font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Cargar Imagen</string>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QVBoxLayout" name="Boton1">
           <property name="spacing">
            <number>6</number>
@@ -147,12 +199,12 @@ background-color: rgb(255, 0, 0);</string>
             </property>
            </spacer>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="label">
             <property name="minimumSize">
              <size>
               <width>135</width>
-              <height>0</height>
+              <height>23</height>
              </size>
             </property>
             <property name="maximumSize">
@@ -164,26 +216,26 @@ background-color: rgb(255, 0, 0);</string>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(158, 158, 158);
 color: rgb(255, 255, 255);
-font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 15pt &quot;MS Shell Dlg 2&quot;;</string>
             </property>
             <property name="text">
-             <string>Elementos
+             <string>Elementos 
 sospechosos: </string>
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignVCenter">
+          <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
            <widget class="QLCDNumber" name="LCDnumber">
             <property name="minimumSize">
              <size>
               <width>135</width>
-              <height>0</height>
+              <height>23</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
-              <height>16777215</height>
+              <width>223</width>
+              <height>23</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -218,12 +270,21 @@ sospechosos: </string>
            <widget class="QLabel" name="imagen_an">
             <property name="minimumSize">
              <size>
-              <width>500</width>
-              <height>250</height>
+              <width>600</width>
+              <height>400</height>
              </size>
             </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 18pt &quot;MS Shell Dlg 2&quot;;</string>
+            </property>
             <property name="text">
-             <string>TextLabel</string>
+             <string>Agregar imagen a analizar</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -232,17 +293,121 @@ sospechosos: </string>
         <item>
          <layout class="QVBoxLayout" name="Alerta">
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="original">
+              <property name="minimumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Original</string>
+              </property>
+              <property name="autoDefault">
+               <bool>false</bool>
+              </property>
+              <property name="default">
+               <bool>false</bool>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="filtro1">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Filtro 1</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="filtro2">
+              <property name="minimumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Filtro 2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="filtro3">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>135</width>
+                <height>23</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Filtro 3</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <spacer name="verticalSpacer_2">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Preferred</enum>
-            </property>
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>13</height>
+              <height>40</height>
              </size>
             </property>
            </spacer>
