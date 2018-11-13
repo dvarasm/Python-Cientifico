@@ -156,7 +156,7 @@ background-color: rgb(85, 255, 127);</string>
            <number>6</number>
           </property>
           <item alignment="Qt::AlignHCenter">
-           <widget class="QPushButton" name="Detener">
+           <widget class="QPushButton" name="Quitar">
             <property name="minimumSize">
              <size>
               <width>135</width>
@@ -175,7 +175,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(255, 0, 0);</string>
             </property>
             <property name="text">
-             <string>Detener Deteccion</string>
+             <string>Quitar Imagen</string>
             </property>
            </widget>
           </item>
@@ -299,7 +299,7 @@ sospechosos: </string>
               <property name="minimumSize">
                <size>
                 <width>135</width>
-                <height>23</height>
+                <height>27</height>
                </size>
               </property>
               <property name="maximumSize">
@@ -309,7 +309,8 @@ sospechosos: </string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+               <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(85, 170, 255);</string>
               </property>
               <property name="text">
                <string>Original</string>
@@ -333,7 +334,7 @@ sospechosos: </string>
               <property name="minimumSize">
                <size>
                 <width>135</width>
-                <height>23</height>
+                <height>27</height>
                </size>
               </property>
               <property name="maximumSize">
@@ -355,7 +356,7 @@ sospechosos: </string>
               <property name="minimumSize">
                <size>
                 <width>135</width>
-                <height>23</height>
+                <height>27</height>
                </size>
               </property>
               <property name="maximumSize">
@@ -380,7 +381,7 @@ sospechosos: </string>
               <property name="minimumSize">
                <size>
                 <width>135</width>
-                <height>23</height>
+                <height>27</height>
                </size>
               </property>
               <property name="maximumSize">
