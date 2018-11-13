@@ -43,21 +43,23 @@ class App(QtWidgets.QApplication):
 
     def funcion_b1(self):#funcion del boton iniciar
         if(self.path!=''):
-            self.MainWindow.ui.barra.setEnabled(True)
+            self.MainWindow.ui.barra.setEnabled(True)#habilita la barra
             self.completed = 0
+            tmp = False
             while self.completed < 100:
                 self.completed += 0.0001
-                self.MainWindow.ui.barra.setValue(self.completed)
-
-            self.sosp += 1 #elemento variable
-            self.MainWindow.ui.LCDnumber.display(self.sosp)#cambia el numero LCD
-            pixmap = QtGui.QPixmap('fuji.png')#carga la imagen
-            pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
-            self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
-            self.MainWindow.ui.original.setEnabled(True)
-            self.MainWindow.ui.filtro1.setEnabled(True)
-            self.MainWindow.ui.filtro2.setEnabled(True)
-            self.MainWindow.ui.filtro3.setEnabled(True)
+                self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
+                tmp = True
+            if(tmp==True):
+                self.sosp += 1 #elemento variable
+                self.MainWindow.ui.LCDnumber.display(self.sosp)#cambia el numero LCD
+                pixmap = QtGui.QPixmap('fuji.png')#carga la imagen
+                pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+                self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
+                self.MainWindow.ui.original.setEnabled(True)#habilita el boton
+                self.MainWindow.ui.filtro1.setEnabled(True)#habilita el boton
+                self.MainWindow.ui.filtro2.setEnabled(True)#habilita el boton
+                self.MainWindow.ui.filtro3.setEnabled(True)#habilita el boton
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada para analizar")
 
@@ -83,10 +85,10 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap(self.path)
             pixmap = pixmap.scaled(600, 400)
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)
-            self.MainWindow.ui.original.setEnabled(False)
-            self.MainWindow.ui.filtro1.setEnabled(True)
-            self.MainWindow.ui.filtro2.setEnabled(True)
-            self.MainWindow.ui.filtro3.setEnabled(True)
+            self.MainWindow.ui.original.setEnabled(False)#deshabilita el boton
+            self.MainWindow.ui.filtro1.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro2.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro3.setEnabled(True)#habilita el boton
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
     
@@ -95,10 +97,10 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap(self.path)
             pixmap = pixmap.scaled(600, 400)
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)
-            self.MainWindow.ui.filtro1.setEnabled(False)
-            self.MainWindow.ui.original.setEnabled(True)
-            self.MainWindow.ui.filtro2.setEnabled(True)
-            self.MainWindow.ui.filtro3.setEnabled(True)
+            self.MainWindow.ui.filtro1.setEnabled(False)#Deshabilita el boton
+            self.MainWindow.ui.original.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro2.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro3.setEnabled(True)#habilita el boton
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
 
@@ -107,10 +109,10 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap(self.path)
             pixmap = pixmap.scaled(600, 400)
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)
-            self.MainWindow.ui.filtro2.setEnabled(False)
-            self.MainWindow.ui.original.setEnabled(True)
-            self.MainWindow.ui.filtro1.setEnabled(True)
-            self.MainWindow.ui.filtro3.setEnabled(True)
+            self.MainWindow.ui.filtro2.setEnabled(False)#Deshabilita el boton
+            self.MainWindow.ui.original.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro1.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro3.setEnabled(True)#habilita el boton
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
 
@@ -119,10 +121,10 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap(self.path)
             pixmap = pixmap.scaled(600, 400)
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)
-            self.MainWindow.ui.filtro3.setEnabled(False)
-            self.MainWindow.ui.original.setEnabled(True)
-            self.MainWindow.ui.filtro2.setEnabled(True)
-            self.MainWindow.ui.filtro1.setEnabled(True)
+            self.MainWindow.ui.filtro3.setEnabled(False)#deshabilita el boton
+            self.MainWindow.ui.original.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro2.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.filtro1.setEnabled(True)#habilita el boton
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
                 
