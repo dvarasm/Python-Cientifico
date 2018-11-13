@@ -11,6 +11,7 @@ class App(QtWidgets.QApplication):
         self.MainWindow.ui.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint|QtCore.Qt.WindowCloseButtonHint)#para no redimensionar
         self.MainWindow.ui.show()
         self.path = ''
+        self.completed =0
                 
         #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#ejemplo pyqt4
         #self.MainWindow.ui.saludar.clicked.connect(self.saludar)#ejemplo pyqt5
@@ -23,7 +24,9 @@ class App(QtWidgets.QApplication):
         self.MainWindow.ui.filtro1.clicked.connect(self.filtro1)
         self.MainWindow.ui.filtro2.clicked.connect(self.filtro2)
         self.MainWindow.ui.filtro3.clicked.connect(self.filtro3)
-
+        self.MainWindow.ui.barra.setValue(self.completed)
+        self.MainWindow.ui.barra.setEnabled(False)
+        
         self.MainWindow.ui.original.setEnabled(False)
         self.MainWindow.ui.filtro1.setEnabled(False)
         self.MainWindow.ui.filtro2.setEnabled(False)
@@ -40,6 +43,12 @@ class App(QtWidgets.QApplication):
 
     def funcion_b1(self):#funcion del boton iniciar
         if(self.path!=''):
+            self.MainWindow.ui.barra.setEnabled(True)
+            self.completed = 0
+            while self.completed < 100:
+                self.completed += 0.0001
+                self.MainWindow.ui.barra.setValue(self.completed)
+
             self.sosp += 1 #elemento variable
             self.MainWindow.ui.LCDnumber.display(self.sosp)#cambia el numero LCD
             pixmap = QtGui.QPixmap('fuji.png')#carga la imagen
