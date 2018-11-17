@@ -27,6 +27,7 @@ class App(QtWidgets.QApplication):
         self.MainWindow.ui.barra.setValue(self.completed)
         self.MainWindow.ui.barra.setEnabled(False)
         
+        self.MainWindow.ui.Quitar.setEnabled(False)
         self.MainWindow.ui.original.setEnabled(False)
         self.MainWindow.ui.filtro1.setEnabled(False)
         self.MainWindow.ui.filtro2.setEnabled(False)
@@ -51,6 +52,8 @@ class App(QtWidgets.QApplication):
                 self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
                 tmp = True
             if(tmp==True):
+                self.MainWindow.ui.Iniciar.setEnabled(False)#deshabilita el botor iniciar cuando ya fue apretado 1 vez
+                self.MainWindow.ui.Quitar.setEnabled(True)#habilita el boton Quitar imagen
                 self.sosp += 1 #elemento variable
                 self.MainWindow.ui.LCDnumber.display(self.sosp)#cambia el numero LCD
                 pixmap = QtGui.QPixmap('fuji.png')#carga la imagen
@@ -67,6 +70,7 @@ class App(QtWidgets.QApplication):
         if(self.path!=''):
             self.path = ''
             self.MainWindow.ui.imagen_an.setText('Agregar imagen a analizar')
+            self.MainWindow.ui.Iniciar.setEnabled(True)
             QtWidgets.QMessageBox.about(self.MainWindow, " ","Se quito imagen analizada")
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")

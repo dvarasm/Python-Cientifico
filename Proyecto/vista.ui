@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>450</height>
+    <height>471</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -139,7 +139,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);
+             <string notr="true">
 font: 12pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(85, 255, 127);</string>
             </property>
@@ -170,9 +170,9 @@ background-color: rgb(85, 255, 127);</string>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);
+             <string notr="true">
 font: 12pt &quot;MS Shell Dlg 2&quot;;
-background-color: rgb(255, 0, 0);</string>
+background-color: rgb(222, 0, 0);</string>
             </property>
             <property name="text">
              <string>Quitar Imagen</string>
@@ -431,6 +431,42 @@ background-color: rgb(85, 170, 255);</string>
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <widget class="QMenu" name="menuAutores">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionNatalia_Soto_Diego_Varas_2"/>
+    <addaction name="actionVersion_v1_0"/>
+   </widget>
+   <addaction name="menuAutores"/>
+  </widget>
+  <action name="actionNatalia_Soto_Diego_Varas">
+   <property name="text">
+    <string>Natalia Soto / Diego Varas</string>
+   </property>
+  </action>
+  <action name="actionVersion_v1_0">
+   <property name="text">
+    <string>Version v1.0</string>
+   </property>
+  </action>
+  <action name="actionNatalia_Soto_Diego_Varas_2">
+   <property name="text">
+    <string>Natalia Soto / Diego Varas</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
