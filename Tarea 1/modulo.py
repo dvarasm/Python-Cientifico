@@ -43,22 +43,22 @@ def crea_diccionario(guion, personajes):
         dic[i] = []
     for i in range(len(parrafo)):
         for j in range(len(personajes)):
-            if personajes[j] in parrafo[i]:
-                pos = len(personajes[j])
+            if (list(personajes)[j] in list(parrafo)[i]):
+                pos = len(list(personajes)[j])
                 dialogo = parrafo[i][pos:]
-                dic[personajes[j]].append(dialogo) #asocia los dialogos con el personaje
+                dic[list(personajes)[j]].append(dialogo) #asocia los dialogos con el personaje
     return dic
 
 #funcion que entrega el personaje que tiene el dialogo mas extenso
 def mas_extenso(dicc):
     max = 0
     max_ext = []
-    for clave, valor in dicc.iteritems():
+    for clave, valor in dicc.items():
         for i in range(len(valor)):
             tmp = filtrar_texto(valor[i]).strip().split(' ')#strip elimina el espacio antes de un string
             if max <= len(tmp):
                 max = len(tmp)
-    for clave,valor in dicc.iteritems():
+    for clave,valor in dicc.items():
         for i in range(len(valor)):
             tmp = filtrar_texto(valor[i]).strip().split(' ')
             if max == len(tmp):
@@ -71,12 +71,12 @@ def mas_extenso(dicc):
 def menos_extenso(dicc):
     min = 100000
     min_ext = []
-    for clave, valor in dicc.iteritems():
+    for clave, valor in dicc.items():
         for i in range(len(valor)):
             tmp = filtrar_texto(valor[i]).strip().split(' ')
             if min >= len(tmp):
                 min = len(tmp)
-    for clave,valor in dicc.iteritems():
+    for clave,valor in dicc.items():
         for i in range(len(valor)):
             tmp = filtrar_texto(valor[i]).strip().split(' ')
             if min == len(tmp):
@@ -88,7 +88,7 @@ def menos_extenso(dicc):
 # funcion que entrega el personaje que tiene mas dialogos en el guion 
 def mas_dialogo(dicc):
     max = 0
-    for clave, valor in dicc.iteritems():#iteritems permite iterar con los elementos del diccionario
+    for clave, valor in dicc.items():#iteritems permite iterar con los elementos del diccionario
         tmp = len(valor)
         if max <= tmp:
             max = tmp
@@ -97,7 +97,7 @@ def mas_dialogo(dicc):
 # funcion que entrega el personaje que tiene menos dialogos en el guion
 def menos_dialogo(dicc):
     min = 100000
-    for clave, valor in dicc.iteritems():
+    for clave, valor in dicc.items():
         tmp = len(valor)
         if min >= tmp:
             min = tmp
@@ -109,7 +109,7 @@ def dialogos (personaje, guion):
     pe = personajes_principales(guion)
     per = []    
     for i in range(len(pe)):
-        per.append(filtrar_texto(pe[i]))
+        per.append(filtrar_texto(list(pe)[i]))
     intera = []
     parrafo = []
     parrafo = guion.split('\n')
