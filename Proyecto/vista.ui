@@ -226,7 +226,7 @@ font: 15pt &quot;MS Shell Dlg 2&quot;;</string>
             </property>
             <property name="text">
              <string>Elementos 
-desconocidos: </string>
+detectados: </string>
             </property>
            </widget>
           </item>
@@ -277,7 +277,7 @@ desconocidos: </string>
             <property name="minimumSize">
              <size>
               <width>600</width>
-              <height>400</height>
+              <height>360</height>
              </size>
             </property>
             <property name="layoutDirection">
