@@ -78,7 +78,7 @@ class App(QtWidgets.QApplication):
                 self.detec = self.R.num_objetos() #elemento variable
                 self.MainWindow.ui.LCDnumber.display(self.detec)#cambia el numero LCD
                 pixmap = QtGui.QPixmap(self.path)#carga la imagen
-                pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+                pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
                 self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
                 self.estado_botones(0,True)
         else:
@@ -99,7 +99,7 @@ class App(QtWidgets.QApplication):
             self.MainWindow.ui.Iniciar.setEnabled(True)#habilita el boton
             self.MainWindow.ui.Quitar.setEnabled(True)#habilita el boton
             pixmap = QtGui.QPixmap(self.path)#carga la imagen
-            pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+            pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.R=Re.Detector(self.path)
         else:
@@ -108,7 +108,7 @@ class App(QtWidgets.QApplication):
     def original(self):
         if(self.path!= ''):
             pixmap = QtGui.QPixmap(self.path)#carga la imagen
-            pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+            pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.estado_botones(0,True)
             self.estado_botones(1,False)
@@ -119,7 +119,7 @@ class App(QtWidgets.QApplication):
         if(self.path!= ''):
             qimage = ImageQt(self.R.transformacion1()) 
             pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
-            pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+            pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.estado_botones(0,True)
             self.estado_botones(2,False)
@@ -130,7 +130,7 @@ class App(QtWidgets.QApplication):
         if(self.path!= ''):
             qimage = ImageQt(self.R.transformacion2()) 
             pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
-            pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+            pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.estado_botones(0,True)
             self.estado_botones(3,False)
@@ -141,7 +141,7 @@ class App(QtWidgets.QApplication):
         if(self.path!= ''):
             qimage = ImageQt(self.R.bordes()) 
             pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
-            pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
+            pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.estado_botones(0,True)
             self.estado_botones(4,False)
