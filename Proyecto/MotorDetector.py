@@ -93,6 +93,7 @@ class App(QtWidgets.QApplication):
         if(self.path!= ''):
             self.MainWindow.ui.cargar_imagen.setEnabled(False)#deshabilita el boton
             self.MainWindow.ui.Iniciar.setEnabled(True)#habilita el boton
+            self.MainWindow.ui.Quitar.setEnabled(True)#habilita el boton
             pixmap = QtGui.QPixmap(self.path)#carga la imagen
             pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
