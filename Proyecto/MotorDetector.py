@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import uic
-import sys,os
+from PIL import Image
+import sys,os,Reconocimiento as Re
+from PIL.ImageQt import ImageQt
 
 class App(QtWidgets.QApplication):
     def __init__(self, *args):
@@ -15,6 +17,7 @@ class App(QtWidgets.QApplication):
         self.path = '' #almacena la direccion del archivo a analizar 
         self.completed =0 #variable para la barra de carga
         self.detec = 0 #variable que almacena numero de elementos detectados
+        self.R = None
                 
         #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#ejemplo pyqt4
         #self.MainWindow.ui.saludar.clicked.connect(self.saludar)#ejemplo pyqt5
@@ -69,9 +72,10 @@ class App(QtWidgets.QApplication):
                 self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
                 tmp = True
             if(tmp==True):
+                tmp1 = self.R.bordes()
                 self.MainWindow.ui.Iniciar.setEnabled(False)#deshabilita el botor iniciar cuando ya fue apretado 1 vez
                 self.MainWindow.ui.Quitar.setEnabled(True)#habilita el boton Quitar imagen
-                self.detec += 1 #elemento variable
+                self.detec = self.R.num_objetos() #elemento variable
                 self.MainWindow.ui.LCDnumber.display(self.detec)#cambia el numero LCD
                 pixmap = QtGui.QPixmap(self.path)#carga la imagen
                 pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
@@ -97,6 +101,7 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap(self.path)#carga la imagen
             pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
+            self.R=Re.Detector(self.path)
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, " ","No selecciono ninguna imagen para cargar")
 
@@ -111,8 +116,9 @@ class App(QtWidgets.QApplication):
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
     
     def filtro1(self):
-        if(self.path!= ''):    
-            pixmap = QtGui.QPixmap(self.path)#carga la imagen
+        if(self.path!= ''):
+            qimage = ImageQt(self.R.transformacion1()) 
+            pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
             pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.estado_botones(0,True)
@@ -122,7 +128,8 @@ class App(QtWidgets.QApplication):
 
     def filtro2(self):
         if(self.path!= ''):
-            pixmap = QtGui.QPixmap(self.path)#carga la imagen
+            qimage = ImageQt(self.R.transformacion2()) 
+            pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
             pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.estado_botones(0,True)
@@ -132,7 +139,8 @@ class App(QtWidgets.QApplication):
 
     def filtro3(self):
         if(self.path!= ''):
-            pixmap = QtGui.QPixmap(self.path)#carga la imagen
+            qimage = ImageQt(self.R.bordes()) 
+            pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
             pixmap = pixmap.scaled(600, 400)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
             self.estado_botones(0,True)
