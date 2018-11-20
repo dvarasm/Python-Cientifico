@@ -30,7 +30,7 @@ class Detector:
         
     def transformacion2(self):
         trans = ''
-        trans = cv2.adaptiveThreshold(self.mygris,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
+        trans = cv2.adaptiveThreshold(self.gris,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
         cv2.THRESH_BINARY,11,2)
         #kernel = np.ones((3,3),np.uint8)
         #trans= cv2.morphologyEx(th3,cv2.MORPH_CLOSE,kernel)
@@ -65,7 +65,7 @@ class Detector:
  
         # Buscamos los contornos
         (_, contornos,_) = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        self.cont = format(len(contornos)-1)
+        self.cont = format(len(contornos))
         # Mostramos el numero de objetos por consola
         #print ("He encontrado {} objetos".format(len(contornos)-1))
         cv2.drawContours(self.original,contornos,-1,(0,0,255), 2)
