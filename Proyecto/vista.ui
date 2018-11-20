@@ -34,20 +34,20 @@
    </property>
    <property name="maximumSize">
     <size>
-     <width>800</width>
-     <height>450</height>
+     <width>16777215</width>
+     <height>16777215</height>
     </size>
    </property>
    <property name="sizeIncrement">
     <size>
-     <width>800</width>
-     <height>450</height>
+     <width>0</width>
+     <height>0</height>
     </size>
    </property>
    <property name="baseSize">
     <size>
-     <width>800</width>
-     <height>450</height>
+     <width>0</width>
+     <height>0</height>
     </size>
    </property>
    <property name="contextMenuPolicy">
@@ -56,8 +56,8 @@
    <property name="toolTip">
     <string notr="true"/>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <layout class="QHBoxLayout" name="Principal">
       <property name="spacing">
        <number>6</number>
@@ -145,8 +145,7 @@ font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">
-font: 12pt &quot;MS Shell Dlg 2&quot;;
+             <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(85, 255, 127);</string>
             </property>
             <property name="text">
@@ -176,8 +175,7 @@ background-color: rgb(85, 255, 127);</string>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">
-font: 12pt &quot;MS Shell Dlg 2&quot;;
+             <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;
 background-color: rgb(222, 0, 0);</string>
             </property>
             <property name="text">
@@ -273,6 +271,32 @@ detectados: </string>
         <item>
          <layout class="QVBoxLayout" name="Imagen">
           <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
            <widget class="QLabel" name="imagen_an">
             <property name="minimumSize">
              <size>
@@ -284,7 +308,9 @@ detectados: </string>
              <enum>Qt::LeftToRight</enum>
             </property>
             <property name="styleSheet">
-             <string notr="true">font: 75 18pt &quot;MS Shell Dlg 2&quot;;</string>
+             <string notr="true">background-color: rgb(158, 158, 158);
+color: rgb(255, 255, 255);
+font: 20pt &quot;MS Shell Dlg 2&quot;;</string>
             </property>
             <property name="text">
              <string>Agregar imagen a analizar</string>
@@ -297,10 +323,33 @@ detectados: </string>
          </layout>
         </item>
         <item>
-         <widget class="QProgressBar" name="barra">
-          <property name="styleSheet">
-           <string notr="true"/>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="barra">
           <property name="value">
            <number>24</number>
           </property>
