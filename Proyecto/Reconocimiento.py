@@ -33,6 +33,7 @@ class Detector:
         
     def transformacion2(self):
         #transforma la imagen en una especie de dibujo
+
         trans = cv2.adaptiveThreshold(self.gris,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
         cv2.THRESH_BINARY,11,2)
         #transforma la matriz entregado de la transformacion anterior a imagen
@@ -55,7 +56,10 @@ class Detector:
         canny= cv2.morphologyEx(canny,cv2.MORPH_CLOSE,kernel)
  
         # Buscamos los contornos
+
         (contornos,_) = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        
         self.cont = format(len(contornos))
         # Mostramos el numero de objetos por consola
         #print ("He encontrado {} objetos".format(len(contornos)))

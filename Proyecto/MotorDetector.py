@@ -1,6 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import uic
-from PIL import Image
 import sys,os,Reconocimiento as Re
 from PIL.ImageQt import ImageQt
 
@@ -10,14 +9,13 @@ class App(QtWidgets.QApplication):
         self.MainWindow = QtWidgets.QMainWindow()#crea la ventana
         self.MainWindow.ui = uic.loadUi('vista.ui')#carga la interfaz
         self.MainWindow.ui.setWindowTitle("Detector")#nombre de la ventana
-        self.MainWindow.ui.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint|QtCore.Qt.WindowCloseButtonHint)#para no redimensionar
         self.MainWindow.ui.show()#muestra la ventana
         
         #variables globales
         self.path = '' #almacena la direccion del archivo a analizar 
         self.completed =0 #variable para la barra de carga
         self.detec = 0 #variable que almacena numero de elementos detectados
-        self.R = None
+        self.R = None #variable que almacenara la clase reconocimiento
                 
         #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#ejemplo pyqt4
         #self.MainWindow.ui.saludar.clicked.connect(self.saludar)#ejemplo pyqt5
@@ -81,6 +79,11 @@ class App(QtWidgets.QApplication):
                 pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
                 self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
                 self.estado_botones(0,True)
+                self.estado_botones(1,False)
+                if(self.detec != 0):
+                    QtWidgets.QMessageBox.about(self.MainWindow, " ",str(self.detec)+" Elementos Detectados")
+                else:
+                    QtWidgets.QMessageBox.about(self.MainWindow, " ","No hay Elementos en la imagen")
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada para analizar")
 
@@ -93,7 +96,7 @@ class App(QtWidgets.QApplication):
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
 
     def cargar_imagen(self):#funcion del boton cargar imagen
-        self.path,m = QtWidgets.QFileDialog.getOpenFileName(self.MainWindow, 'Abrir Imagen',"","Image files (*.jpg *.png)")
+        self.path,m = QtWidgets.QFileDialog.getOpenFileName(self.MainWindow, 'Abrir Imagen',"","Image files (*.jpg *.png *.jpeg)")
         if(self.path!= ''):
             self.MainWindow.ui.cargar_imagen.setEnabled(False)#deshabilita el boton
             self.MainWindow.ui.Iniciar.setEnabled(True)#habilita el boton
