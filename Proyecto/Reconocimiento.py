@@ -55,7 +55,7 @@ class Detector:
         canny= cv2.morphologyEx(canny,cv2.MORPH_CLOSE,kernel)
  
         # Buscamos los contorno
-        (contornos,_) = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        (_,contornos,_) = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         self.cont = format(len(contornos))
         # Mostramos el numero de objetos por consola
         #print ("He encontrado {} objetos".format(len(contornos)))
