@@ -65,10 +65,13 @@ class App(QtWidgets.QApplication):
             self.MainWindow.ui.barra.setEnabled(True)#habilita la barra
             self.completed = 0
             tmp = False #flag para ver si la barra llego a 100% y poder continuar
+            self.R.detec()
             while self.completed < 100:
                 self.completed += 0.0001
+                #self.completed += 0.000005 #20seg aprox
                 self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
                 tmp = True
+                
             if(tmp==True):
                 tmp1 = self.R.bordes()
                 self.MainWindow.ui.Iniciar.setEnabled(False)#deshabilita el botor iniciar cuando ya fue apretado 1 vez

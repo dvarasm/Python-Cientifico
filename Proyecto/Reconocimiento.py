@@ -4,6 +4,8 @@ import cv2
 import scipy
 #from skimage import filters
 import matplotlib.pyplot as plt
+from imageai.Detection import ObjectDetection
+import os
 class Detector:
     def __init__(self,nombre_archivo):
         self.nombre_archivo = nombre_archivo
@@ -15,6 +17,24 @@ class Detector:
         self.mygris=None
         self.cont = 0
         self.trans2 = ''
+        
+
+        
+    def detec(self):
+        execution_path = os.getcwd()
+        detector = ObjectDetection()
+        detector.setModelTypeAsRetinaNet()
+        detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
+        detector.loadModel()
+    
+        detections = detector.detectObjectsFromImage(input_image=os.path.join(self.transformacion2()), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
+        print("Numero de objetos:",len(detections))
+
+        for eachObject in detections:
+            if(eachObject["name"] == 'apple'):
+                print(eachObject["name"] , " : " , eachObject["percentage_probability"] )
+            else:
+                print('Objeto sospechoso',eachObject["name"])
 
     def transformacion1(self):    
         #transformacion a rgb
