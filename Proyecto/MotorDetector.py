@@ -25,6 +25,7 @@ class App(QtWidgets.QApplication):
         self.MainWindow.ui.Quitar.clicked.connect(self.quitar_img)#listener del boton quitar imagen
         self.MainWindow.ui.cargar_imagen.clicked.connect(self.cargar_imagen)#listener del boton cargar imagen
         self.MainWindow.ui.original.clicked.connect(self.original)#listener del boton original
+        self.MainWindow.ui.analizada.clicked.connect(self.analizado)#listener del boton original
         self.MainWindow.ui.filtro1.clicked.connect(self.filtro1)#listener del boton filtro 1
         self.MainWindow.ui.filtro2.clicked.connect(self.filtro2)#listener del boton filtro 2
         self.MainWindow.ui.filtro3.clicked.connect(self.filtro3)#listener del boton filtro 3
@@ -44,31 +45,42 @@ class App(QtWidgets.QApplication):
         self.estado_botones(0,False)
         self.MainWindow.ui.barra.setValue(self.completed)#deja la barra de carga en 0
         self.MainWindow.ui.LCDnumber.display(self.detec)#cambia el numero del LCD
+        self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: white;color: white')
 
     def estado_botones(self,num,estado):#funcion para habilitar/deshabilitar botones de parametros de la imagen
         if(num == 0):
             self.MainWindow.ui.original.setEnabled(estado)#Cambia el estado True/False del boton original
+            self.MainWindow.ui.analizada.setEnabled(estado)#Cambia el estado True/False del boton analizada
             self.MainWindow.ui.filtro1.setEnabled(estado)#Cambia el estado True/False del boton filtro 1
             self.MainWindow.ui.filtro2.setEnabled(estado)#Cambia el estado True/False del boton filtro 2
             self.MainWindow.ui.filtro3.setEnabled(estado)#Cambia el estado True/False del boton filtro 3
-        if(num ==1):    
+        if(num ==1):
+            self.estado_botones(0,not estado)    
             self.MainWindow.ui.original.setEnabled(estado)#Cambia el estado True/False del boton original
-        if(num ==2):    
+        if(num ==2):
+            self.estado_botones(0,not estado)    
             self.MainWindow.ui.filtro1.setEnabled(estado)#Cambia el estado True/False del boton filtro 1
-        if(num ==3):    
+        if(num ==3):  
+            self.estado_botones(0,not estado)  
             self.MainWindow.ui.filtro2.setEnabled(estado)#Cambia el estado True/False del boton filtro 2
         if(num ==4):
-            self.MainWindow.ui.filtro3.setEnabled(estado)#Cambia el estado True/False del boton filtro 3  
+            self.estado_botones(0,not estado)
+            self.MainWindow.ui.filtro3.setEnabled(estado)#Cambia el estado True/False del boton filtro 3
+        if(num ==5):
+            self.estado_botones(0,not estado)
+            self.MainWindow.ui.analizada.setEnabled(estado)#Cambia el estado True/False del boton analizada
 
     def iniciar_det(self):#funcion del boton iniciar
         if(self.path!=''):
             self.MainWindow.ui.barra.setEnabled(True)#habilita la barra
             self.completed = 0
             tmp = False #flag para ver si la barra llego a 100% y poder continuar
+            while self.completed < 50:
+                self.completed += 0.0001
+                self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
             self.R.detec()
             while self.completed < 100:
                 self.completed += 0.0001
-                #self.completed += 0.000005 #20seg aprox
                 self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
                 tmp = True
                 
@@ -78,13 +90,17 @@ class App(QtWidgets.QApplication):
                 self.MainWindow.ui.Quitar.setEnabled(True)#habilita el boton Quitar imagen
                 self.detec = self.R.num_objetos() #elemento variable
                 self.MainWindow.ui.LCDnumber.display(self.detec)#cambia el numero LCD
-                pixmap = QtGui.QPixmap(self.path)#carga la imagen
+                pixmap = QtGui.QPixmap("imagenew.jpg")#carga la imagen
                 pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
                 self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
-                self.estado_botones(0,True)
-                self.estado_botones(1,False)
+                self.estado_botones(5,False)
                 if(self.detec != 0):
-                    QtWidgets.QMessageBox.about(self.MainWindow, " ",str(self.detec)+" Elementos Detectados")
+                    if(self.R.objetos_sosp()== True):
+                        self.MainWindow.ui.img_mala.setText("Objeto Sospechoso")
+                        self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: red;color: white')
+                    else:
+                        self.MainWindow.ui.img_mala.setText("Ok")
+                        self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: rgb(0, 255, 0);color: white')
                 else:
                     QtWidgets.QMessageBox.about(self.MainWindow, " ","No hay Elementos en la imagen")
         else:
@@ -116,8 +132,16 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap(self.path)#carga la imagen
             pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
-            self.estado_botones(0,True)
             self.estado_botones(1,False)
+        else:
+            QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
+    
+    def analizado(self):
+        if(self.path!= ''):
+            pixmap = QtGui.QPixmap("imagenew.jpg")#carga la imagen
+            pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
+            self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
+            self.estado_botones(5,False)
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
     
@@ -127,7 +151,6 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
             pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
-            self.estado_botones(0,True)
             self.estado_botones(2,False)
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
@@ -138,7 +161,6 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
             pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
-            self.estado_botones(0,True)
             self.estado_botones(3,False)
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")
@@ -149,7 +171,6 @@ class App(QtWidgets.QApplication):
             pixmap = QtGui.QPixmap.fromImage(qimage)#carga la imagen
             pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
             self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
-            self.estado_botones(0,True)
             self.estado_botones(4,False)
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada")

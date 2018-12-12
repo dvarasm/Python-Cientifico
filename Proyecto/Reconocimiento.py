@@ -17,8 +17,8 @@ class Detector:
         self.mygris=None
         self.cont = 0
         self.trans2 = ''
-        
-
+        self.det = None
+        self. obj_sosp = False
         
     def detec(self):
         execution_path = os.getcwd()
@@ -26,15 +26,11 @@ class Detector:
         detector.setModelTypeAsRetinaNet()
         detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
         detector.loadModel()
-    
-        detections = detector.detectObjectsFromImage(input_image=os.path.join(self.transformacion2()), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
-        print("Numero de objetos:",len(detections))
-
+        detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , self.nombre_archivo), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
+        self.det = detections
         for eachObject in detections:
-            if(eachObject["name"] == 'apple'):
-                print(eachObject["name"] , " : " , eachObject["percentage_probability"] )
-            else:
-                print('Objeto sospechoso',eachObject["name"])
+            if(eachObject["name"] != 'apple'):
+                self.obj_sosp = True
 
     def transformacion1(self):    
         #transformacion a rgb
@@ -89,6 +85,12 @@ class Detector:
 
     def num_objetos(self):
         #retorna el numero de objetos encontrados por las transformaciones correspondientes 
-        return int(self.cont)
+        return int(len(self.det))
+
+    def objetos_sosp(self):
+        if(self.obj_sosp == True):
+            return True
+        else:
+            return False
 
         
