@@ -219,7 +219,7 @@ background-color: rgb(222, 0, 0);</string>
             </property>
            </spacer>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
            <widget class="QLabel" name="img_mala">
             <property name="minimumSize">
              <size>

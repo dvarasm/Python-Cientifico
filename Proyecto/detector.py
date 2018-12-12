@@ -9,7 +9,7 @@ detector = ObjectDetection()
 detector.setModelTypeAsRetinaNet()
 detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
 detector.loadModel()
-detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , "0.jpg"), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
+detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , "1.jpg"), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
 
 elapsed_time = time() - start_time
 print("Elapsed time: %0.10f seconds." % elapsed_time)

@@ -2,7 +2,6 @@ from PIL import Image
 import numpy as np
 import cv2
 import scipy
-#from skimage import filters
 import matplotlib.pyplot as plt
 from imageai.Detection import ObjectDetection
 import os
@@ -20,14 +19,14 @@ class Detector:
         self.det = None
         self. obj_sosp = False
         
-    def detec(self):
+    def detec(self):#deteccion de manzanas
         execution_path = os.getcwd()
         detector = ObjectDetection()
-        detector.setModelTypeAsRetinaNet()
-        detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
-        detector.loadModel()
+        detector.setModelTypeAsRetinaNet()#modelo utilizado
+        detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))#carga base de datos
+        detector.loadModel()#carga modelo con la base
         detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , self.nombre_archivo), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
-        self.det = detections
+        self.det = detections #para el numero de objetos
         for eachObject in detections:
             if(eachObject["name"] != 'apple'):
                 self.obj_sosp = True
@@ -69,12 +68,8 @@ class Detector:
         #eliminamos el ruido , o manchas negras de mas en la foto 
         kernel = np.ones((3,3),np.uint8)
         canny= cv2.morphologyEx(canny,cv2.MORPH_CLOSE,kernel)
- 
         # Buscamos los contorno
         (_,contornos,_) = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        self.cont = format(len(contornos))
-        # Mostramos el numero de objetos por consola
-        #print ("He encontrado {} objetos".format(len(contornos)))
         #dibujamos los contornos encontrados en la imagen original
         cv2.drawContours(self.original,contornos,-1,(0,0,255), 2)
         #cv2.imshow("contornos", self.original)
@@ -87,10 +82,8 @@ class Detector:
         #retorna el numero de objetos encontrados por las transformaciones correspondientes 
         return int(len(self.det))
 
-    def objetos_sosp(self):
+    def objetos_sosp(self):# indica si hay algun objeto sospechoso
         if(self.obj_sosp == True):
             return True
         else:
             return False
-
-        

@@ -45,7 +45,7 @@ class App(QtWidgets.QApplication):
         self.estado_botones(0,False)
         self.MainWindow.ui.barra.setValue(self.completed)#deja la barra de carga en 0
         self.MainWindow.ui.LCDnumber.display(self.detec)#cambia el numero del LCD
-        self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: white;color: white')
+        self.MainWindow.ui.img_mala.setStyleSheet('background-color: white;color: white')
 
     def estado_botones(self,num,estado):#funcion para habilitar/deshabilitar botones de parametros de la imagen
         if(num == 0):
@@ -78,7 +78,7 @@ class App(QtWidgets.QApplication):
             while self.completed < 50:
                 self.completed += 0.0001
                 self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
-            self.R.detec()
+            self.R.detec() #inicia el proceso para detectar
             while self.completed < 100:
                 self.completed += 0.0001
                 self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
@@ -94,15 +94,15 @@ class App(QtWidgets.QApplication):
                 pixmap = pixmap.scaled(600, 360)#redmensiona la imagen
                 self.MainWindow.ui.imagen_an.setPixmap(pixmap)#cambia la imagen
                 self.estado_botones(5,False)
-                if(self.detec != 0):
-                    if(self.R.objetos_sosp()== True):
+                if(self.detec != 0):# si al menos hay un objeto detectado 
+                    if(self.R.objetos_sosp()== True):# si hay un objeto sospechoso
                         self.MainWindow.ui.img_mala.setText("Objeto Sospechoso")
                         self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: red;color: white')
-                    else:
+                    else:#si no hay objeto sospechoso
                         self.MainWindow.ui.img_mala.setText("Ok")
                         self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: rgb(0, 255, 0);color: white')
                 else:
-                    QtWidgets.QMessageBox.about(self.MainWindow, " ","No hay Elementos en la imagen")
+                    QtWidgets.QMessageBox.about(self.MainWindow, " ","No hay Elementos en la imagen para analizar")
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada para analizar")
 
