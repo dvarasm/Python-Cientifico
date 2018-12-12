@@ -579,7 +579,7 @@ background-color: rgb(85, 170, 255);</string>
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Version v1.0</string>
+    <string>Version v2.0</string>
    </property>
   </action>
   <action name="actionNatalia_Soto_Diego_Varas_2">
