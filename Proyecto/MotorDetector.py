@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import uic
 import sys,os,Reconocimiento as Re
 from PIL.ImageQt import ImageQt
+import winsound
 
 class App(QtWidgets.QApplication):
     def __init__(self, *args):
@@ -98,6 +99,12 @@ class App(QtWidgets.QApplication):
                     if(self.R.objetos_sosp()== True):# si hay un objeto sospechoso
                         self.MainWindow.ui.img_mala.setText("Objeto Sospechoso")
                         self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: red;color: white')
+                        QtWidgets.QMessageBox.about(self.MainWindow, "Alerta","Hay objetos sospechosos")
+                        #sonido de alerta
+                        winsound.Beep(600, 500)
+                        winsound.Beep(700, 500)
+                        winsound.Beep(800, 500)
+                        winsound.Beep(900, 500)
                     else:#si no hay objeto sospechoso
                         self.MainWindow.ui.img_mala.setText("Ok")
                         self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: rgb(0, 255, 0);color: white')
