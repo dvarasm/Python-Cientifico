@@ -17,6 +17,7 @@ class App(QtWidgets.QApplication):
         self.completed =0 #variable para la barra de carga
         self.detec = 0 #variable que almacena numero de elementos detectados
         self.R = None #variable que almacenara la clase reconocimiento
+        self.model = 1 #entero para seleccionar el tipo de modelo a usar
                 
         #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#ejemplo pyqt4
         #self.MainWindow.ui.saludar.clicked.connect(self.saludar)#ejemplo pyqt5
@@ -73,19 +74,31 @@ class App(QtWidgets.QApplication):
 
     def iniciar_det(self):#funcion del boton iniciar
         if(self.path!=''):
-            self.MainWindow.ui.barra.setEnabled(True)#habilita la barra
-            self.completed = 0
-            tmp = False #flag para ver si la barra llego a 100% y poder continuar
-            while self.completed < 50:
-                self.completed += 0.0001
-                self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
-            self.R.detec() #inicia el proceso para detectar
-            while self.completed < 100:
-                self.completed += 0.0001
-                self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
-                tmp = True
+            cancel = False#flag para ver si se eligio algun modelo y poder continuar
+            tmp = False#flag para ver si la barra llego a 100% y poder continuar
+            items = ("Yolo model","RetinaNet Model")#modelos a elegir
+            item, okPressed = QtWidgets.QInputDialog.getItem(self.MainWindow, "Modelo","Seleccionar Modelo:", items, 0, False)
+            if (okPressed == False):#si se presiona cancelar no hace nada
+                cancel = False
+            if (okPressed and item == 'Yolo model'):# si se elige el modelo yolo
+                self.model = 1
+                cancel = True
+            elif(okPressed and item == 'RetinaNet Model'):#si se elige el modelo retina
+                self.model = 0
+                cancel = True
+            if(cancel==True):# se ejecuta solo si se eligio un modelo                
+                self.MainWindow.ui.barra.setEnabled(True)#habilita la barra
+                self.completed = 0
+                while self.completed < 50:
+                    self.completed += 0.0001
+                    self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
+                self.R.detec(self.model) #inicia el proceso para detectar con un modelo en especifico
+                while self.completed < 100:
+                    self.completed += 0.0001
+                    self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
+                    tmp = True
                 
-            if(tmp==True):
+            if(tmp==True and cancel == True):
                 tmp1 = self.R.bordes()
                 self.MainWindow.ui.Iniciar.setEnabled(False)#deshabilita el botor iniciar cuando ya fue apretado 1 vez
                 self.MainWindow.ui.Quitar.setEnabled(True)#habilita el boton Quitar imagen
@@ -99,12 +112,13 @@ class App(QtWidgets.QApplication):
                     if(self.R.objetos_sosp()== True):# si hay un objeto sospechoso
                         self.MainWindow.ui.img_mala.setText("Objeto Sospechoso")
                         self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: red;color: white')
-                        QtWidgets.QMessageBox.about(self.MainWindow, "Alerta","Hay objetos sospechosos")
                         #sonido de alerta
                         winsound.Beep(600, 500)
                         winsound.Beep(700, 500)
                         winsound.Beep(800, 500)
                         winsound.Beep(900, 500)
+                        QtWidgets.QMessageBox.about(self.MainWindow, "Alerta","Hay objetos sospechosos")
+                        
                     else:#si no hay objeto sospechoso
                         self.MainWindow.ui.img_mala.setText("Ok")
                         self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: rgb(0, 255, 0);color: white')
