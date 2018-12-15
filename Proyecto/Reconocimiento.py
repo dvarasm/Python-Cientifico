@@ -27,7 +27,7 @@ class Detector:
             detector.setModelTypeAsYOLOv3()#carga el tipo de modelo
             detector.setModelPath( os.path.join(execution_path , "yolo.h5"))#carga el archivo con el modelo de deteccion 
         else:
-            detector.setModelTypeAsRetinaNet())#carga el tipo de modelo
+            detector.setModelTypeAsRetinaNet() #carga el tipo de modelo
             detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))#carga el archivo con el modelo de deteccion
 
         detector.loadModel("normal")#carga modelo y se puede ajustar la velocidad de esta, si se aumenta hace una deteccion menos precisa
