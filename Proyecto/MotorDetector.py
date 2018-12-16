@@ -18,6 +18,7 @@ class App(QtWidgets.QApplication):
         self.detec = 0 #variable que almacena numero de elementos detectados
         self.R = None #variable que almacenara la clase reconocimiento
         self.model = 1 #entero para seleccionar el tipo de modelo a usar
+        self.velocidad ="normal" #almacena la velocidad de deteccion del modelo
                 
         #self.connect(self.MainWindow.ui.saludar, QtCore.SIGNAL('clicked()'), self.saludar)#ejemplo pyqt4
         #self.MainWindow.ui.saludar.clicked.connect(self.saludar)#ejemplo pyqt5
@@ -72,27 +73,48 @@ class App(QtWidgets.QApplication):
             self.estado_botones(0,not estado)
             self.MainWindow.ui.analizada.setEnabled(estado)#Cambia el estado True/False del boton analizada
 
+    def vel_det(self,okPressed,item):#funcion para elegir la velocidad de la deteccion
+        if (okPressed and item == 'normal'):
+            return 'normal'
+        if (okPressed and item == 'fast'):
+            return 'fast'
+        if (okPressed and item == 'faster'):
+            return'faster'
+        if (okPressed and item == 'fastest'):
+            return 'fastest'
+        if (okPressed and item == 'flash'):
+            return 'flas'
+
     def iniciar_det(self):#funcion del boton iniciar
         if(self.path!=''):
             cancel = False#flag para ver si se eligio algun modelo y poder continuar
             tmp = False#flag para ver si la barra llego a 100% y poder continuar
             items = ("Yolo model","RetinaNet Model")#modelos a elegir
-            item, okPressed = QtWidgets.QInputDialog.getItem(self.MainWindow, "Modelo","Seleccionar Modelo:", items, 0, False)
+            items2 =("normal","fast","faster","fastest","flash")
+            item, okPressed = QtWidgets.QInputDialog.getItem(self.MainWindow, "Modelo","Seleccionar Modelo:", items,0, False)
             if (okPressed == False):#si se presiona cancelar no hace nada
                 cancel = False
             if (okPressed and item == 'Yolo model'):# si se elige el modelo yolo
                 self.model = 1
                 cancel = True
+                item, okPressed = QtWidgets.QInputDialog.getItem(self.MainWindow, "Velocidad","Seleccionar Velocidad Detección:", items2,0, False)
+                if (okPressed == False):#si se presiona cancelar no hace nada
+                    cancel = False
+                self.velocidad = self.vel_det(okPressed,item)
             elif(okPressed and item == 'RetinaNet Model'):#si se elige el modelo retina
                 self.model = 0
                 cancel = True
+                item, okPressed = QtWidgets.QInputDialog.getItem(self.MainWindow, "Velocidad","Seleccionar Velocidad Detección:", items2,0, False)
+                if (okPressed == False):#si se presiona cancelar no hace nada
+                    cancel = False
+                self.velocidad = self.vel_det(okPressed,item)
             if(cancel==True):# se ejecuta solo si se eligio un modelo                
                 self.MainWindow.ui.barra.setEnabled(True)#habilita la barra
                 self.completed = 0
                 while self.completed < 50:
                     self.completed += 0.0001
                     self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
-                self.R.detec(self.model) #inicia el proceso para detectar con un modelo en especifico
+                self.R.detec(self.model,self.velocidad) #inicia el proceso para detectar con un modelo en especifico
                 while self.completed < 100:
                     self.completed += 0.0001
                     self.MainWindow.ui.barra.setValue(self.completed)#cambia el valor de la barra de progreso
@@ -124,6 +146,8 @@ class App(QtWidgets.QApplication):
                         self.MainWindow.ui.img_mala.setStyleSheet('font: 75 12pt "MS Shell Dlg 2";background-color: rgb(0, 255, 0);color: white')
                 else:
                     QtWidgets.QMessageBox.about(self.MainWindow, " ","No hay Elementos en la imagen para analizar")
+                    self.MainWindow.ui.Iniciar.setEnabled(True)#habilita el boton
+                    self.MainWindow.ui.Quitar.setEnabled(True)#habilita el boton
         else:
             QtWidgets.QMessageBox.about(self.MainWindow, "Error","No hay imagen cargada para analizar")
 

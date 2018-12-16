@@ -19,7 +19,7 @@ class Detector:
         self.det = None
         self. obj_sosp = False
         
-    def detec(self,modelo):#deteccion de manzanas
+    def detec(self,modelo,velocidad):#deteccion de manzanas
         execution_path = os.getcwd()#obtiene el directorio
         detector = ObjectDetection()#crea un objeto 
 
@@ -30,8 +30,8 @@ class Detector:
             detector.setModelTypeAsRetinaNet() #carga el tipo de modelo
             detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))#carga el archivo con el modelo de deteccion
 
-        detector.loadModel("normal")#carga modelo y se puede ajustar la velocidad de esta, si se aumenta hace una deteccion menos precisa
-        detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , self.nombre_archivo), output_image_path=os.path.join(execution_path , "imagenew.jpg"),display_percentage_probability=False,minimum_percentage_probability=50)
+        detector.loadModel(velocidad)#carga modelo y se puede ajustar la velocidad de esta, si se aumenta hace una deteccion menos precisa
+        detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , self.nombre_archivo), output_image_path=os.path.join(execution_path , "imagenew.jpg"),display_percentage_probability=True,minimum_percentage_probability=45)
         self.det = detections #para el numero de objetos
         for eachObject in detections:
             if(eachObject["name"] != 'apple'):
