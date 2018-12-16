@@ -16,6 +16,6 @@ Para ejecutar este programa ejecute MotorDetector.py
 
 Importante:
 
-El reconocimiento establecido en dicha iteracion funciona al 99.9% para objetos que estan separados, no asi para aquellos que estan amontonados entre si , donde falla completamente en la deteccion de bordes y cantidad de objetos encontrados 
+El reconocimiento establecido en dicha iteracion funciona al 99.9% para objetos que estan separados, no asi para aquellos que estan amontonados entre si (ejemplo: probar imagen 11) , donde falla completamente en la deteccion de bordes y cantidad de objetos encontrados 
 
 El programa Entrenador.py (en proceso, fase beta) , se encarga de reconocer el tipo de manzana dado lo entregado anteriormente, pero aun no esta implementado como tal

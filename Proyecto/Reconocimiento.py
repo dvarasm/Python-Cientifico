@@ -2,8 +2,9 @@ from PIL import Image
 import numpy as np
 import cv2
 import scipy
-#from skimage import filters
 import matplotlib.pyplot as plt
+from imageai.Detection import ObjectDetection
+import os
 class Detector:
     def __init__(self,nombre_archivo):
         self.nombre_archivo = nombre_archivo
@@ -15,6 +16,26 @@ class Detector:
         self.mygris=None
         self.cont = 0
         self.trans2 = ''
+        self.det = None
+        self. obj_sosp = False
+        
+    def detec(self,modelo,velocidad):#deteccion de manzanas
+        execution_path = os.getcwd()#obtiene el directorio
+        detector = ObjectDetection()#crea un objeto 
+
+        if(modelo == 1):#elige el modelo
+            detector.setModelTypeAsYOLOv3()#carga el tipo de modelo
+            detector.setModelPath( os.path.join(execution_path , "yolo.h5"))#carga el archivo con el modelo de deteccion 
+        else:
+            detector.setModelTypeAsRetinaNet() #carga el tipo de modelo
+            detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))#carga el archivo con el modelo de deteccion
+
+        detector.loadModel(velocidad)#carga modelo y se puede ajustar la velocidad de esta, si se aumenta hace una deteccion menos precisa
+        detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , self.nombre_archivo), output_image_path=os.path.join(execution_path , "imagenew.jpg"),display_percentage_probability=True,minimum_percentage_probability=45)
+        self.det = detections #para el numero de objetos
+        for eachObject in detections:
+            if(eachObject["name"] != 'apple'):
+                self.obj_sosp = True
 
     def transformacion1(self):    
         #transformacion a rgb
@@ -53,12 +74,8 @@ class Detector:
         #eliminamos el ruido , o manchas negras de mas en la foto 
         kernel = np.ones((3,3),np.uint8)
         canny= cv2.morphologyEx(canny,cv2.MORPH_CLOSE,kernel)
- 
         # Buscamos los contorno
-        (contornos,_) = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        self.cont = format(len(contornos))
-        # Mostramos el numero de objetos por consola
-        #print ("He encontrado {} objetos".format(len(contornos)))
+        (_,contornos,_) = cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         #dibujamos los contornos encontrados en la imagen original
         cv2.drawContours(self.original,contornos,-1,(0,0,255), 2)
         #cv2.imshow("contornos", self.original)
@@ -69,6 +86,10 @@ class Detector:
 
     def num_objetos(self):
         #retorna el numero de objetos encontrados por las transformaciones correspondientes 
-        return int(self.cont)
+        return int(len(self.det))
 
-        
+    def objetos_sosp(self):# indica si hay algun objeto sospechoso
+        if(self.obj_sosp == True):
+            return True
+        else:
+            return False
